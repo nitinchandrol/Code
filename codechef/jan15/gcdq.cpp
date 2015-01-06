@@ -12,33 +12,36 @@ int gcd(int a, int b){
 int main(){
 	int t;
 	cin >> t;
-	int n,q, next;
-	cin >> n;
-	cin >> q;
-	vector<int> v;
-	for(int i=0; i < n; i++){
-		cin >> next;
-		v.push_back(next);
-	}
+	int n,q, next, i, j;
 	int first,last,ans;
 	bool start;
-	for(int i=0; i<q; i++){
-		cin >> first;
-		cin >> last;
-		start = true;
-		for(int j=1; j <= n; j++ ){
-			if(j< first || j > last){
-				if(start){
-					ans = v[j - 1];
-					start = false;
-				}
-				else{
-					ans = gcd(v[j- 1], ans);
-					
+	vector<int> v;
+	for(int k=0; k<t; k++){
+		cin >> n;
+		cin >> q;
+		for(i=0; i < n; i++){
+			cin >> next;
+			v.push_back(next);
+		}
+		
+		for(i=0; i<q; i++){
+			cin >> first;
+			cin >> last;
+			start = true;
+			for(j=1; j <= n; j++ ){
+				if(j< first || j > last){
+					if(!start){
+						ans = gcd(v[j- 1], ans);
+					}
+					else{
+						ans = v[j - 1];
+						start = false;
+					}
 				}
 			}
+			cout << ans << "\n";
 		}
-		cout << ans << "\n";
+		v.clear();
+		cout << "\n";
 	}
-
 }
